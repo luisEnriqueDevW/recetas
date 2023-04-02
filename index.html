@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador Recetas Comida</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        #resultado {
+            display: grid;
+            /* position: absolute; */
+            grid-template-columns: repeat(3, minmax(auto, 30%));
+            grid-auto-rows: 30%;
+            gap: 30px;
+        }
+
+        .cuadroFlotante {
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vmax;
+            background-color: rgba(168, 163, 163, 0.356);
+
+        }
+
+        #popit {
+
+            text-align: center;
+            display: grid;
+            grid-template-areas: "a0""a1""a2""a3";
+            grid-template-rows: 5% auto 50% 40%;
+            grid-template-columns: 1fr;
+            position: fixed;
+            width: 30%;
+            height: 80%;
+            right: 35%;
+            top: 10%;
+            border: 3px solid black;
+            overflow: hidden;
+            background-color: aliceblue;
+            border-radius: 5px;
+
+
+
+        }
+
+
+
+        #iconX {
+            background-color: black;
+            grid-area: a0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #iconX2 {
+            position: absolute;
+            height: 10%;
+            float: right;
+
+            right: 0;
+            width: 10%;
+        }
+
+        /*   #iconX button {
+            position: relative;
+            right: 0;
+            top: 0;
+            height: 100%;
+        } */
+
+        #tituloPopIt1 {
+            margin: 5px;
+            /* border: 3px solid black; */
+            grid-area: a1;
+            width: auto;
+            height: auto;
+            box-sizing: border-box;
+        }
+
+        #tituloPopIt2 {
+
+            text-align: center;
+
+            width: auto;
+            height: auto;
+            font-size: auto;
+            box-sizing: border-box;
+        }
+
+        #tituloPopIt2 p {
+            text-align: center;
+            margin: 0;
+            line-height: none;
+        }
+
+
+        #imgPopIt {
+            object-fit: fill;
+            width: 100%;
+            height: 100%;
+            grid-area: a2;
+            border: 3px solid black;
+        }
+
+        #imgPopIt img {
+            object-fit: fill;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        #instPopIt {
+            border: 1px solid black;
+            width: 100%;
+            height: 100%;
+            grid-area: a3;
+            overflow: scroll;
+        }
+
+        /*  .cuadroFlotante p{
+            position: fixed;
+        } */
+
+        .cuadroReceta {
+            border: 1px solid black;
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        .imgReceta {
+            object-fit: contain;
+            width: 100%;
+            margin-top: 30px;
+            margin-bottom: 30px;
+
+        }
+
+        .linkMenus {
+            width: 100%;
+        }
+
+        .linkMenus a {
+            width: 49%;
+            height: 100%;
+            border: 1px solid black;
+            font-size: 100%;
+            color: rgb(0, 0, 0);
+            border: 1px solid rgb(255, 0, 0);
+            background-color: rgba(245, 11, 11, 0.37);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body id="xe">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger bg-gradient p-3">
+        <div class="container-fluid">
+            <a class="navbar-brand fs-4" href="index.html">Buscador de Recetas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link fs-4 active" aria-current="page" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fs-4" href="favoritos.html">Mis Favoritos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="mt-5 container-lg">
+        <h2 class="text-center fs-1">Inicio</h2>
+
+        <div class="d-md-flex justify-content-md-center mt-5 xxx ">
+            <form class="card col-md-8 bg-light p-5">
+                <div>
+                    <label for="categorias" class="form-label">Categoría</label>
+                    <select autofocus id="categorias" class="form-select" >
+                        <option value="">-- Seleccione --</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div id="resultado" class="mt-5 row"></div>
+        <div id="xx">
+        </div>
+
+
+    </main>
+
+
+    <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-3 font-bold" id="staticBackdropLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer flex justify-content-between"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <strong class="me-auto text-white">App Recetas</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
+
+
+    <script src="js/bootstrap.bundle.min.js" type="module"></script>
+    <script src="js/app.js" type="module"></script>
+</body>
+
+</html>
